@@ -15,23 +15,17 @@ public class WeekdayScheduleTest {
 	public void shouldInstantiateObject() {
 		LocalTime startTime =LocalTime.parse("04:00");
 		LocalTime endTime =LocalTime.parse("08:00");
-		int hourlyRate = 25;
-		weekdaySchedule = new WeekdaySchedule( startTime, endTime, hourlyRate);
+		weekdaySchedule = new WeekdaySchedule( startTime, endTime);
 		
 	}
 	@Test
-	public void testGetWorkedHours() {
+	public void givenWeekdayScheduleThenGetWorkedHours() {
 		assertEquals(4,weekdaySchedule.getWorkedHours());
 	}
 
 	@Test
-	public void testGetWagePerHour() {
+	public void givenWeekdayScheduleThenGetWagePerHour() {
+		weekdaySchedule.getHourlyRateforWorkedSchedule();
 		assertEquals(100, weekdaySchedule.getWagePerHour());
 	}
-
-	@Test
-	public void testGetHourlyRateforWorkedSchedule() {
-		//fail("Not yet implemented");
-	}
-
 }

@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
 public class ReadFile {
 	private ArrayList<String> employeesInFile = new ArrayList<String>();
 	
-	public ArrayList<String> extractEmployeesFromFile(){
+	public ArrayList<String> extractEmployeesFromFile(String filePath){
 		try {
-			File file = new File("employee_data.txt");
+			File file = new File(filePath);
 			Scanner reader = new Scanner(file);
 			while (reader.hasNextLine()) {
 				employeesInFile.add(reader.nextLine());
@@ -28,9 +28,11 @@ public class ReadFile {
 	//convert employee data string to employee object
 	public Employee toEmployee(String infoEmployee){
 		//extract name
-		String name= infoEmployee.split("=")[0];
+		int nameIndex=0;
+		String name= infoEmployee.split("=")[nameIndex];
 		//extract schedules
-		String schedules = infoEmployee.split("=")[1];
+		int schedulesIndex=1;
+		String schedules = infoEmployee.split("=")[schedulesIndex];
 		
 		ArrayList<Schedule> workedSchedule = toSchedules(schedules);
 		Employee employee = new Employee();
@@ -51,10 +53,9 @@ public class ReadFile {
 		
 		//extract schedules from provided string
 		for(String workedSchedule: day_schedules) {
-			
+			times = extractHours(workedSchedule);
 			//Is a weekday schedule?
 			if(workedSchedule.matches(regexForWeekdaySchedule)) {
-				times = extractHours(workedSchedule);
 				WeekdaySchedule weekdaySchedule = new WeekdaySchedule(times.get(startTime), times.get(endTime));
 				weekdaySchedule.getHourlyRateforWorkedSchedule();;
 				workedHours.add(weekdaySchedule);
@@ -62,7 +63,6 @@ public class ReadFile {
 			}
 			//Is a weekend schedule?
 			if(workedSchedule.matches(regexForWeekendSchedule)) {
-				times = extractHours(workedSchedule);		
 				WeekendSchedule weekendSchedule = new WeekendSchedule(times.get(startTime), times.get(endTime));
 				weekendSchedule.getHourlyRateforWorkedSchedule();
 				workedHours.add(weekendSchedule);
@@ -80,5 +80,11 @@ public class ReadFile {
 			times.add(LocalTime.parse(matcher.group()));
 		}
 		return times;
+	}
+	
+	public boolean verifyFormat(String data) {
+		String regexFormat = "^[A-Z]+=((MO|TU|WE|TH|FR|SA|SU)\\d{2}:\\d{2}-\\d{2}:\\d{2},?)+"; 
+		if(data.matches(regexFormat)) return true;
+		return false;		
 	}
 }
