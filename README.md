@@ -24,6 +24,9 @@ Implementa el metodo `calculateTotalWage()` que permite calcular el salario tota
 
 1. Ejecutar `Run as -> mvn install`. 
 2. Luego ejecutar en el IDE la opción `Run as -> Java Application`
+3. Para cambiar las entradas, modificar el archivo 'employee_data.txt' usando el formato del ejercicio.  
+Ejemplo:  
+`RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00`
 ## TO RUN TESTS
 Ejecutar `Run as -> mvn test`
 
