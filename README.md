@@ -6,7 +6,7 @@ La aplicación utiliza conceptos de OOP como encapsulación y herencia para que 
 - Clases implementadas:
   * _Main_:  
   Ejecuta la aplicacion de consola.
-  * _Readfile_:  
+  * _ReadFile_:  
   Permite leer el archivo y extraer la información del empleado.
   * _Employee_:  
   Contiene atributos como el nombre del empleado y horarios en los que trabajó.
